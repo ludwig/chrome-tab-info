@@ -1,3 +1,4 @@
+// background.js
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: 'copyTabInfo',
@@ -8,12 +9,12 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === 'copyTabInfo') {
-    const tabInfo = `${tab.title}\n${tab.url}`;
-    //console.log(tabInfo);
-    navigator.clipboard.writeText(tabInfo).then(() => {
-      console.log('Tab info copied to clipboard');
-    }).catch(err => {
-      console.error('Failed to copy tab info: ', err);
+    const text = `${tab.title}\n${tab.url}`;
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      files: ['context_script.js']
+    }).then(() => {
+      chrome.tabs.sendMessage(tab.id, {action: "copy", text: text});
     });
   }
 });

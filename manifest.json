@@ -1,9 +1,10 @@
 {
-  "manifest_version": 3,
-  "name": "Copy Tab Info",
+  "name": "Copy Page Info",
   "version": "1.0",
-  "permissions": ["activeTab", "contextMenus"],
+  "description": "Copy the page title and URL to clipboard",
+  "permissions": ["activeTab", "contextMenus", "clipboardWrite", "scripting"],
   "background": {
     "service_worker": "background.js"
-  }
+  },
+  "manifest_version": 3
 }
