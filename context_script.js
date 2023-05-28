@@ -21,7 +21,7 @@ function copyToClipboard(title, url, useHtml) {
   if (useHtml) {
     // Copy HTML to clipboard
     //const html = `<a href="${url}">${title}</a>`;
-    const html2 = `<p>${title}</p>\n<a href="${url}">${url}</a>\n`;
+    const html2 = `<p>${title}</p>\n<a href="${url}">${url}</a><br><br>\n`;
     navigator.clipboard.write([
       new ClipboardItem({
         "text/plain": new Blob([`${title}\n${url}`], { type: "text/plain" }),
