@@ -1,4 +1,21 @@
 // context_script.js
+function showPopup(message) {
+  var popup = document.createElement('div');
+  popup.style.position = 'fixed';
+  popup.style.left = '50%';
+  popup.style.top = '50%';
+  popup.style.transform = 'translate(-50%, -50%)';
+  popup.style.backgroundColor = 'white';
+  popup.style.border = '1px solid black';
+  popup.style.padding = '10px';
+  popup.style.zIndex = '10000';
+  popup.textContent = message;
+  document.body.appendChild(popup);
+  setTimeout(() => {
+    document.body.removeChild(popup);
+  }, 1000);
+}
+
 function copyToClipboard(title, url, useHtml) {
   var scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
   if (useHtml) {
@@ -16,6 +33,9 @@ function copyToClipboard(title, url, useHtml) {
     navigator.clipboard.writeText(`${title}\n${url}`);
   }
   window.scrollTo(0, scrollPosition);
+
+  // Show popup
+  showPopup('Title and URL copied!');
 }
 
 chrome.runtime.onMessage.addListener(
