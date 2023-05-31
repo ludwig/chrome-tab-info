@@ -13,7 +13,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       target: { tabId: tab.id },
       files: ['context_script.js']
     }).then(() => {
-      chrome.tabs.sendMessage(tab.id, {action: "copy", title: tab.title, url: tab.url, useHtml: true});
+      chrome.tabs.sendMessage(tab.id, {action: "copy", tab: tab});
     });
   }
 });
@@ -26,7 +26,7 @@ chrome.commands.onCommand.addListener((command) => {
         target: { tabId: tab.id },
         files: ['context_script.js']
       }).then(() => {
-        chrome.tabs.sendMessage(tab.id, {action: "copy", title: tab.title, url: tab.url, useHtml: true});
+        chrome.tabs.sendMessage(tab.id, {action: "copy", tab: tab});
       });
     });
   }
